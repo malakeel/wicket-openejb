@@ -1,0 +1,10 @@
+The application is working currently when deployed to the embedded jetty
+
+The application will run properly using:
+
+mvn jetty:run 
+
+The application fails to obtain (injected) with the PersonDao object when deployed to tomcat.
+When deployed to tomcat the war file is generated using "mvn package" or "mvn war:war"
+
+
