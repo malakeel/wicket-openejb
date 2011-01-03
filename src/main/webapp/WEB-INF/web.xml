@@ -4,13 +4,6 @@
 	version="2.4">
 	<display-name>wicket</display-name>
 
-<!--	<servlet>-->
-<!--		<servlet-name>LoaderServlet</servlet-name>-->
-<!--		<servlet-class>org.apache.openejb.tomcat.loader.LoaderServlet</servlet-class>-->
-<!--		<load-on-startup>0</load-on-startup>-->
-<!--	</servlet>-->
-
-
 	<filter>
 		<filter-name>wicket.wicket</filter-name>
 		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>

@@ -3,10 +3,9 @@ package com.example;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
+import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
 import org.apache.wicket.injection.ComponentInjector;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.wicketstuff.javaee.injection.JavaEEComponentInjector;
@@ -14,25 +13,16 @@ import org.wicketstuff.javaee.naming.IJndiNamingStrategy;
 
 public class WicketApplication extends WebApplication {
 
-	public WicketApplication() {
-	}
-
 	@Override
 	protected void init() {
-
 		System.out.println("Starting ....");
 		IJndiNamingStrategy nameStrategy = new OpenEjbNamingStrategy();
-//		ComponentInjector jeeInjector = new JavaEEComponentInjector(this,
-//				nameStrategy);
-		ComponentInjector jeeInjector = new JavaEEComponentInjector(this);
-
-		System.out.println("Current naming factory" +
-				System.getProperty("java.naming.factory.initial"));
+		ComponentInjector jeeInjector = new JavaEEComponentInjector(this,
+				nameStrategy);
 		System.setProperty("java.naming.factory.initial",
 				"org.apache.openejb.client.LocalInitialContextFactory");
-
 		addComponentInstantiationListener(jeeInjector);
-		initContext();
+		// initContext();
 	}
 
 	private void initContext() {
@@ -45,11 +35,10 @@ public class WicketApplication extends WebApplication {
 						"Could not find jndi.properties in class path\n");
 			}
 			props.load(input);
-			new InitialContext();
+			Context context = new InitialContext(props);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

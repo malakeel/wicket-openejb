@@ -1,6 +1,7 @@
 package com.example;
 
 
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import org.apache.wicket.markup.html.basic.Label;
@@ -17,7 +18,18 @@ public class HomePage extends BasePage {
 	private static final long serialVersionUID = 1L;
 
 	public HomePage() {
-		List<Person> all = dao.findAll();
+		
+		List<Person> all ;
+		try
+		{
+			all= dao.findAll();
+			
+		}catch (Exception e){
+			all = new LinkedList<Person>();
+			e.printStackTrace();
+			new JNDITree();
+		}
+		
 		if (all.size() == 0) {
 			this.populateData();
 			all = dao.findAll();
