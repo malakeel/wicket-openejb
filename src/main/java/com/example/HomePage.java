@@ -1,35 +1,33 @@
 package com.example;
 
-
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
+import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import com.example.dao.PersonDao;
 import com.example.entities.Person;
 
-public class HomePage extends BasePage {
+public class HomePage extends WebPage {
 	@EJB(name = "PersonDaoLocal")
 	private PersonDao dao;
 
 	private static final long serialVersionUID = 1L;
 
 	public HomePage() {
-		
-		List<Person> all ;
-		try
-		{
-			all= dao.findAll();
-			
-		}catch (Exception e){
+
+		List<Person> all;
+		try {
+			all = dao.findAll();
+
+		} catch (Exception e) {
 			all = new LinkedList<Person>();
 			e.printStackTrace();
 			new JNDITree();
 		}
-		
+
 		if (all.size() == 0) {
 			this.populateData();
 			all = dao.findAll();
@@ -44,9 +42,7 @@ public class HomePage extends BasePage {
 			}
 		};
 		add(lstView);
-		
-		
-//		add(new BookmarkablePageLink("nextPage", SearchForm.class));
+		// add(new BookmarkablePageLink("nextPage", SearchForm.class));
 	}
 
 	private void populateData() {
