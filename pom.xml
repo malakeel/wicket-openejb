@@ -22,6 +22,12 @@
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket</artifactId>
 			<version>${wicket.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -32,6 +38,7 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -64,7 +71,6 @@
 			<version>${jetty.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>perfectjpattern</groupId>
 			<artifactId>perfectjpattern-jee</artifactId>
@@ -74,6 +80,14 @@
 					<artifactId>geronimo-spec-j2ee</artifactId>
 					<groupId>geronimo-spec</groupId>
 				</exclusion>
+				<exclusion>
+					<artifactId>geronimo-jpa_3.0_spec</artifactId>
+					<groupId>org.apache.geronimo.specs</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>geronimo-jta_1.1_spec</artifactId>
+					<groupId>org.apache.geronimo.specs</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -82,18 +96,67 @@
 			<version>1.4.8</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.openejb</groupId>
+			<artifactId>openejb-core</artifactId>
+			<version>${openejb.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>javaee-api</artifactId>
+					<groupId>org.apache.openejb</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<artifactId>javaee-api</artifactId>
+			<groupId>org.apache.openejb</groupId>
+			<version>5.0-3</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.openejb</groupId>
+			<artifactId>openejb-javaagent</artifactId>
+			<version>${openejb.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.10</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
 			<version>10.7.1.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.openejb</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>5.0-2</version>
-			<scope>provided</scope>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.0-801.jdbc4</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>org.apache.openejb</groupId>
+			<artifactId>openejb-tomcat-loader</artifactId>
+			<version>3.1.4</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>org.apache.tomcat</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>perfectjpattern</id>
+			<name>PerfectJPattern Releases</name>
+			<url>http://perfectjpattern.sourceforge.net/m2repo</url>
+		</repository>
+	</repositories>
 	<build>
 		<finalName>phonebook</finalName>
 		<resources>
@@ -125,12 +188,6 @@
 			</testResource>
 		</testResources>
 		<plugins>
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>1.0.5-SNAPSHOT</version>
-			</plugin>
-
 			<plugin>
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>

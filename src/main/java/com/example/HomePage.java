@@ -42,7 +42,6 @@ public class HomePage extends WebPage {
 			}
 		};
 		add(lstView);
-		// add(new BookmarkablePageLink("nextPage", SearchForm.class));
 	}
 
 	private void populateData() {

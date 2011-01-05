@@ -5,8 +5,8 @@
 	<persistence-unit name="contacts">
 		<jta-data-source>openEjbDatabase</jta-data-source>
 		<class>com.example.entities.Person</class>
-		<class>com.example.entities.Contact</class>
-		<class>com.example.entities.Job</class>
+		<!--<class>com.example.entities.Contact</class>-->
+		<!--<class>com.example.entities.Job</class>-->
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 		</properties>
